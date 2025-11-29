@@ -1,0 +1,8 @@
+tensorflow
+underthesea
+gradio
+rouge-score
+matplotlib
+seaborn
+scikit-learn
+pandas
