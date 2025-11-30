@@ -11,17 +11,31 @@ from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 smooth = SmoothingFunction().method1
 
 def generate_extractive(article, ext_state):
-    """Generate extractive summary and update state."""
+    """Generate extractive summary and update state.
+    If no article provided, return a helpful message and keep previous state.
+    """
+    # Check for empty input and avoid generating
+    if not (article and article.strip()):
+        msg = "Không thể sinh tóm tắt Extractive: vui lòng nhập văn bản để tóm tắt."
+        return msg, ext_state
+
     try:
-        summary = extractive_summary(article or "")
+        summary = extractive_summary(article)
     except Exception as e:
         summary = f"Error (extractive): {e}"
     return summary, summary
 
 def generate_abstractive(article, abs_state):
-    """Generate abstractive summary and update state."""
+    """Generate abstractive summary and update state.
+    If no article provided, return a helpful message and keep previous state.
+    """
+    # Check for empty input and avoid generating
+    if not (article and article.strip()):
+        msg = "Không thể sinh tóm tắt Abstractive: vui lòng nhập văn bản để tóm tắt."
+        return msg, abs_state
+
     try:
-        summary = abstractive_summary(article or "")
+        summary = abstractive_summary(article)
     except Exception as e:
         summary = f"Error (abstractive): {e}"
     return summary, summary
